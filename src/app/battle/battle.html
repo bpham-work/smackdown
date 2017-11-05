@@ -1,26 +1,36 @@
-<div class="container">
-    <div>
-        <div>
-            <h1>Player 1 Score: {{ p1Result.getScore() }}</h1>
-            <ul>
-                <li *ngFor="let sent of p1Result.sentences">{{ sent.text }}</li>
-            </ul>
+<mat-card>
+    <mat-card-title>
+        <h3>HEY YOU WANNA TALK SOME SHIT? Grab a partner and exchange vulgarities. The most vulgar wins!</h3>
+    </mat-card-title>
+    <mat-card-content>
+        <div class="container">
+            <div>
+                <div>
+                    <h1>Player 1 Score: {{ p1Result.getScore() }}</h1>
+                    <ul>
+                        <li *ngFor="let sent of p1Result.sentences">{{ sent.text }}</li>
+                    </ul>
+                </div>
+                <rtc-recorder #p1Recorder (blob)="receiveP1Blob($event)"></rtc-recorder>
+            </div>
+            <div *ngIf="isEndOfGame()">
+                <div *ngIf="isTie()">IT IS A TIE!! xD</div>
+                <div *ngIf="didP1Win() && !isTie()">PLAYER 1 WINS!! xD</div>
+                <div *ngIf="!didP1Win() && !isTie()">PLAYER 2 WINS!! xD</div>
+            </div>
+            <div><button mat-raised-button color="primary" (click)="reset()">RESET</button></div>
+            <div>
+                <div>
+                    <h1>Player 2 Score: {{ p2Result.getScore() }}</h1>
+                    <ul>
+                        <li *ngFor="let sent of p1Result.sentences">{{ sent.text }}</li>
+                    </ul>
+                </div>
+                <rtc-recorder #p2Recorder (blob)="receiveP2Blob($event)"></rtc-recorder>
+            </div>
         </div>
-        <rtc-recorder #p1Recorder (blob)="receiveP1Blob($event)"></rtc-recorder>
-    </div>
-    <div *ngIf="isEndOfGame()">
-        <div *ngIf="isTie()">IT IS A TIE!! xD</div>
-        <div *ngIf="didP1Win() && !isTie()">PLAYER 1 WINS!! xD</div>
-        <div *ngIf="!didP1Win() && !isTie()">PLAYER 2 WINS!! xD</div>
-
-    </div>
-    <div>
-        <div>
-            <h1>Player 2 Score: {{ p2Result.getScore() }}</h1>
-            <ul>
-                <li *ngFor="let sent of p1Result.sentences">{{ sent.text }}</li>
-            </ul>
-        </div>
-        <rtc-recorder #p2Recorder (blob)="receiveP2Blob($event)"></rtc-recorder>
-    </div>
-</div>
+    </mat-card-content>
+    <mat-card-footer>
+        Press record and talk into the microphone. You have 15 seconds.
+    </mat-card-footer>
+</mat-card>

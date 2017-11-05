@@ -35,6 +35,7 @@ import '../styles/styles.scss';
 import '../styles/headings.css';
 import { RecortRtcComponent } from './rtc/recordrtc.component';
 import { BattleComponent } from './battle/battle.component';
+import { MaterialModule } from './material.module';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -70,10 +71,14 @@ type StoreType = {
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    MaterialModule,
     RouterModule.forRoot(ROUTES, {
       useHash: Boolean(history.pushState) === false,
       preloadingStrategy: PreloadAllModules
     })
+  ],
+  exports: [
+      MaterialModule
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.

@@ -40,7 +40,7 @@ export class RecortRtcComponent {
         };
         this.stream = stream;
         this.recordRTC = RecordRTC(stream, options);
-        this.recordRTC.setRecordingDuration(1000 * 10);
+        this.recordRTC.setRecordingDuration(1000 * 15);
         this.recordRTC.startRecording();
         let video: HTMLVideoElement = this.video.nativeElement;
         video.src = window.URL.createObjectURL(stream);

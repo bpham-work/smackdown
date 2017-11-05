@@ -65,6 +65,15 @@ export class BattleComponent {
         return this.battleResult === BattleResult.TIE;
     }
 
+    reset(): void {
+        this.p1Result = SentimentResult.NULL_OBJECT;
+        this.p2Result = SentimentResult.NULL_OBJECT;
+        this.battleResult = undefined;
+
+        this.hasP1Gone = false;
+        this.hasP2Gone = false;
+    }
+
     private checkIfShouldEndGame(): void {
         if (this.hasP1Gone && this.hasP2Gone) {
             this.determineWinner();
