@@ -36,6 +36,7 @@ export class BattleComponent {
                 res = res.json();
                 let result = SentimentResult.from(res);
                 this.p1Result = result;
+                console.log(result);
                 this.checkIfShouldEndGame();
             });
     }
@@ -47,6 +48,7 @@ export class BattleComponent {
                 res = res.json();
                 let result = SentimentResult.from(res);
                 this.p2Result = result;
+                console.log(result);
                 this.checkIfShouldEndGame();
             });
     }
