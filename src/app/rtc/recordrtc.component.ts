@@ -40,7 +40,8 @@ export class RecortRtcComponent {
         //     bitsPerSecond: 128000 // if this line is provided, skip above two
         // };
         let options = {
-            type: 'audio'
+            type: 'audio',
+            recorderType: RecordRTC.StereoAudioRecorder
         };
         this.stream = stream;
         this.recordRTC = RecordRTC(stream, options);
