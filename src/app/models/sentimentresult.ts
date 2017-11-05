@@ -26,7 +26,7 @@ export class SentimentResult {
     getText(): string {
         let text = '';
         for (let sent of this.sentences) {
-            text += sent + '\n';
+            text += sent.text + '\n';
         }
         return text;
     }
