@@ -20,9 +20,12 @@ export class BattleComponent {
     @ViewChild('p1Recorder') public p1Recorder: RecortRtcComponent;
     @ViewChild('p2Recorder') public p2Recorder: RecortRtcComponent;
 
-    public p1Result: SentimentResult;
-    public p2Result: SentimentResult;
+    public p1Result: SentimentResult = SentimentResult.NULL_OBJECT;
+    public p2Result: SentimentResult = SentimentResult.NULL_OBJECT;
     public battleResult: BattleResult;
+
+    private hasP1Gone = false;
+    private hasP2Gone = false;
 
     constructor(private audioService: AudioService) {}
 
@@ -30,6 +33,7 @@ export class BattleComponent {
         console.log(blob);
         this.audioService.submit(blob)
             .subscribe((res: Response) => {
+                this.hasP1Gone = true;
                 res = res.json();
                 let result = SentimentResult.from(res);
                 this.p1Result = result;
@@ -41,6 +45,7 @@ export class BattleComponent {
         console.log(blob);
         this.audioService.submit(blob)
             .subscribe((res: Response) => {
+                this.hasP2Gone = true;
                 res = res.json();
                 let result = SentimentResult.from(res);
                 this.p2Result = result;
@@ -61,7 +66,7 @@ export class BattleComponent {
     }
 
     private checkIfShouldEndGame(): void {
-        if (this.p1Result && this.p2Result) {
+        if (this.hasP1Gone && this.hasP2Gone) {
             this.determineWinner();
         }
     }

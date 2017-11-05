@@ -1,5 +1,9 @@
 <div class="container">
     <div>
+        <div>
+            <h1>Player 1 Score:</h1>
+            {{ p1Result.getScore() }}
+        </div>
         <rtc-recorder #p1Recorder (blob)="receiveP1Blob($event)"></rtc-recorder>
     </div>
     <div *ngIf="isEndOfGame()">
@@ -9,6 +13,10 @@
 
     </div>
     <div>
+        <div>
+            <h1>Player 2 Score:</h1>
+            {{ p2Result.getScore() }}
+        </div>
         <rtc-recorder #p2Recorder (blob)="receiveP2Blob($event)"></rtc-recorder>
     </div>
 </div>
