@@ -1,0 +1,14 @@
+<div class="container">
+    <div>
+        <rtc-recorder #p1Recorder (blob)="receiveP1Blob($event)"></rtc-recorder>
+    </div>
+    <div *ngIf="isEndOfGame()">
+        <div *ngIf="isTie()">IT IS A TIE!! xD</div>
+        <div *ngIf="didP1Win()">PLAYER 1 WINS!! xD</div>
+        <div *ngIf="!didP1Win()">PLAYER 2 WINS!! xD</div>
+
+    </div>
+    <div>
+        <rtc-recorder #p2Recorder (blob)="receiveP2Blob($event)"></rtc-recorder>
+    </div>
+</div>

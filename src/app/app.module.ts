@@ -33,6 +33,8 @@ import { XLargeDirective } from './home/x-large';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
+import { RecortRtcComponent } from './rtc/recordrtc.component';
+import { BattleComponent } from './battle/battle.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -56,7 +58,9 @@ type StoreType = {
     AboutComponent,
     HomeComponent,
     NoContentComponent,
-    XLargeDirective
+    XLargeDirective,
+    RecortRtcComponent,
+    BattleComponent
   ],
   /**
    * Import Angular's modules.
