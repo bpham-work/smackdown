@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { RecortRtcComponent } from '../rtc/recordrtc.component';
 import { AudioService } from '../rtc/audio.service';
 import { SentimentResult } from '../models/sentimentresult';
+import { Response } from '@angular/http';
 
 enum BattleResult {
     P1_WINNER,
@@ -28,7 +29,9 @@ export class BattleComponent {
     receiveP1Blob(blob: any): void {
         console.log(blob);
         this.audioService.submit(blob)
-            .subscribe((result: SentimentResult) => {
+            .subscribe((res: Response) => {
+                res = res.json();
+                let result = SentimentResult.from(res);
                 this.p1Result = result;
                 this.checkIfShouldEndGame();
             });
@@ -37,7 +40,9 @@ export class BattleComponent {
     receiveP2Blob(blob: any): void {
         console.log(blob);
         this.audioService.submit(blob)
-            .subscribe((result: SentimentResult) => {
+            .subscribe((res: Response) => {
+                res = res.json();
+                let result = SentimentResult.from(res);
                 this.p2Result = result;
                 this.checkIfShouldEndGame();
             });
@@ -62,9 +67,9 @@ export class BattleComponent {
     }
 
     private determineWinner(): void {
-        if (Math.abs(this.p1Result.rating) > Math.abs(this.p2Result.rating)) {
+        if (this.p1Result.getScore() < this.p2Result.getScore()) {
             this.battleResult = BattleResult.P1_WINNER;
-        } else if (Math.abs(this.p1Result.rating) < Math.abs(this.p2Result.rating)) {
+        } else if (this.p1Result.getScore() > this.p2Result.getScore()) {
             this.battleResult = BattleResult.P2_WINNER;
         } else {
             this.battleResult = BattleResult.TIE

@@ -4,8 +4,8 @@
     </div>
     <div *ngIf="isEndOfGame()">
         <div *ngIf="isTie()">IT IS A TIE!! xD</div>
-        <div *ngIf="didP1Win()">PLAYER 1 WINS!! xD</div>
-        <div *ngIf="!didP1Win()">PLAYER 2 WINS!! xD</div>
+        <div *ngIf="didP1Win() && !isTie()">PLAYER 1 WINS!! xD</div>
+        <div *ngIf="!didP1Win() && !isTie()">PLAYER 2 WINS!! xD</div>
 
     </div>
     <div>

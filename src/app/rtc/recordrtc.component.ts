@@ -41,7 +41,9 @@ export class RecortRtcComponent {
         // };
         let options = {
             type: 'audio',
-            recorderType: RecordRTC.StereoAudioRecorder
+            recorderType: RecordRTC.StereoAudioRecorder,
+            sampleRate: 44100,
+            numberOfAudioChannels: 1
         };
         this.stream = stream;
         this.recordRTC = RecordRTC(stream, options);
