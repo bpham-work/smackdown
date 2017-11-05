@@ -3,6 +3,7 @@ import { RecortRtcComponent } from '../rtc/recordrtc.component';
 import { AudioService } from '../rtc/audio.service';
 import { SentimentResult } from '../models/sentimentresult';
 import { Response } from '@angular/http';
+import { MatSnackBar } from '@angular/material';
 
 enum BattleResult {
     P1_WINNER,
@@ -27,7 +28,8 @@ export class BattleComponent {
     private hasP1Gone = false;
     private hasP2Gone = false;
 
-    constructor(private audioService: AudioService) {}
+    constructor(private audioService: AudioService,
+                private snackBar: MatSnackBar) {}
 
     receiveP1Blob(blob: any): void {
         this.audioService.submit(blob)
@@ -35,9 +37,13 @@ export class BattleComponent {
                 this.hasP1Gone = true;
                 res = res.json();
                 let result = SentimentResult.from(res);
-                this.p1Result = result;
                 console.log(result);
-                this.checkIfShouldEndGame();
+                if (result.isEmpty()) {
+                    this.popInaudibleToast();
+                } else {
+                    this.p1Result = result;
+                    this.checkIfShouldEndGame();
+                }
             });
     }
 
@@ -47,9 +53,13 @@ export class BattleComponent {
                 this.hasP2Gone = true;
                 res = res.json();
                 let result = SentimentResult.from(res);
-                this.p2Result = result;
                 console.log(result);
-                this.checkIfShouldEndGame();
+                if (result.isEmpty()) {
+                    this.popInaudibleToast();
+                } else {
+                    this.p2Result = result;
+                    this.checkIfShouldEndGame();
+                }
             });
     }
 
@@ -88,5 +98,9 @@ export class BattleComponent {
         } else {
             this.battleResult = BattleResult.TIE
         }
+    }
+
+    private popInaudibleToast(): void {
+        this.snackBar.open('WHAT?? We can\'t hear your puny voice. Try again.');
     }
 }

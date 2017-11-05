@@ -1,6 +1,6 @@
 export class SentimentResult {
     documentSentiment: {magnitude: number, score: number};
-    sentences: Array<Sentence>;
+    sentences: Array<Sentence> = [];
 
     static NULL_OBJECT = new SentimentResult();
 
@@ -10,17 +10,29 @@ export class SentimentResult {
         return new SentimentResult(documentSentiment, sentences);
     }
 
-    constructor(documentSentiment?: {magnitude: number, score: number}, sentences?: Array<Sentence>) {
+    constructor(documentSentiment?: {magnitude: number, score: number}, sentences: Array<Sentence> = []) {
         this.documentSentiment = documentSentiment;
         this.sentences = sentences;
     }
 
     getScore(): number {
-        if (!this.documentSentiment && !this.sentences) {
+        if (!this.documentSentiment && this.sentences.length === 0) {
             return 0;
         }
         let result = this.documentSentiment.score * this.documentSentiment.magnitude;
         return Math.round(result * 100) / 100;
+    }
+
+    getText(): string {
+        let text = '';
+        for (let sent of this.sentences) {
+            text += sent + '\n';
+        }
+        return text;
+    }
+
+    isEmpty(): boolean {
+        return this.sentences.length === 0;
     }
 }
 

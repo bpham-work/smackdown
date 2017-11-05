@@ -7,9 +7,9 @@
             <div>
                 <div>
                     <h1>Player 1 Score: {{ p1Result.getScore() }}</h1>
-                    <ul>
-                        <li *ngFor="let sent of p1Result.sentences">{{ sent.text }}</li>
-                    </ul>
+                    <div>
+                        {{ p1Result.getText() }}
+                    </div>
                 </div>
                 <rtc-recorder #p1Recorder (blob)="receiveP1Blob($event)"></rtc-recorder>
             </div>
@@ -22,9 +22,9 @@
             <div>
                 <div>
                     <h1>Player 2 Score: {{ p2Result.getScore() }}</h1>
-                    <ul>
-                        <li *ngFor="let sent of p1Result.sentences">{{ sent.text }}</li>
-                    </ul>
+                    <div>
+                        {{ p2Result.getText() }}
+                    </div>
                 </div>
                 <rtc-recorder #p2Recorder (blob)="receiveP2Blob($event)"></rtc-recorder>
             </div>
