@@ -19,7 +19,8 @@ export class SentimentResult {
         if (!this.documentSentiment && !this.sentences) {
             return 0;
         }
-        return this.documentSentiment.score * this.documentSentiment.magnitude;
+        let result = this.documentSentiment.score * this.documentSentiment.magnitude;
+        return Math.round(result * 100) / 100;
     }
 }
 

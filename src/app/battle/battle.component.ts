@@ -30,7 +30,6 @@ export class BattleComponent {
     constructor(private audioService: AudioService) {}
 
     receiveP1Blob(blob: any): void {
-        console.log(blob);
         this.audioService.submit(blob)
             .subscribe((res: Response) => {
                 this.hasP1Gone = true;
@@ -42,7 +41,6 @@ export class BattleComponent {
     }
 
     receiveP2Blob(blob: any): void {
-        console.log(blob);
         this.audioService.submit(blob)
             .subscribe((res: Response) => {
                 this.hasP2Gone = true;

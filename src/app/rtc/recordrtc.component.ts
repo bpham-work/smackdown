@@ -32,13 +32,6 @@ export class RecortRtcComponent {
     }
 
     successCallback(stream: MediaStream) {
-
-        // var options = {
-        //     mimeType: 'video/webm', // or video/webm\;codecs=h264 or video/webm\;codecs=vp9
-        //     audioBitsPerSecond: 128000,
-        //     videoBitsPerSecond: 128000,
-        //     bitsPerSecond: 128000 // if this line is provided, skip above two
-        // };
         let options = {
             type: 'audio',
             recorderType: RecordRTC.StereoAudioRecorder,
